@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:baselineAligned="false"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="gestionhorario.aplicacionmovil.uts.horario.controladores.RolActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="CREAR ROL"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp"
+            android:layout_weight="1.00" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/cerrarSesion"
+            app:backgroundTint="@android:color/holo_red_dark"
+            app:elevation="0dp"
+            app:fabSize="mini"
+            app:srcCompat="@android:drawable/ic_lock_power_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            srcCompat="@android:drawable/ic_lock_power_off" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.03"
+            android:paddingTop="10dp"
+            android:text="Nombre"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txtNombreRol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
+
+        <Button
+            android:id="@+id/btnAgregarRol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:background="#5cb85c"
+            android:text="Agregar"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btnModificarRol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#5bc0de"
+            android:text="Modificar"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btnEliminarRol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:background="#d9534f"
+            android:text="Eliminar"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listaRoles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:animationCache="false"
+        android:choiceMode="none"
+        android:divider="@color/colorPrimary"
+        android:dividerHeight="1dp"
+        android:scrollingCache="false"
+        android:smoothScrollbar="true"
+        android:textFilterEnabled="true" />
+
+</LinearLayout>

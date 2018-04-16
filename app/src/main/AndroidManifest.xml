@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="gestionhorario.aplicacionmovil.uts.horario">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".controladores.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".controladores.UsuariosActivity" />
+        <activity android:name=".controladores.MateriasActivity" />
+        <activity android:name=".controladores.HorariosActivity" />
+        <activity android:name=".controladores.RolActivity" />
+        <activity android:name=".controladores.OpcionesActivity" />
+        <activity android:name=".controladores.ListaUsuarioAdmActivity" />
+        <activity android:name=".controladores.ListaRolAdmActivity" />
+        <activity android:name=".controladores.ListaMateriasAdmActivity" />
+        <activity android:name=".controladores.ListaHorarioAdmActivity" />
+        <activity android:name=".controladores.ListaMateriasDocenteActivity" />
+        <activity android:name=".controladores.ListaUsuarioMateriaAdmActivity" />
+        <activity android:name=".controladores.ListaUsuarioMateriaHorarioAdmActivity" />
+        <activity android:name=".controladores.HorarioDocenteActivity" />
+        <activity android:name=".controladores.ListaMateriasEstudianteActivity" />
+        <activity android:name=".controladores.ListaHorarioEstudianteActivity" />
+        <activity android:name=".controladores.DetalleMateriaActivity" />
+        <activity android:name=".controladores.UbicacionAdmActivity" />
+        <activity android:name=".controladores.UbicacionHorarioAdmActivity" />
+        <activity android:name=".controladores.ListaHorarioUbicacionAdmActivity" />
+        <activity android:name=".controladores.VariablesActivity"></activity>
+    </application>
+
+</manifest>

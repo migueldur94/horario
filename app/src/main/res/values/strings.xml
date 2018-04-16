@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">HORARIO</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_materias">MateriasActivity</string>
+    <string name="title_activity_horarios">horarios</string>
+    <string name="title_activity_opciones">OpcionesActivity</string>
+    <string name="title_activity_principal">INFORMACION TUTORIAS</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_lista_usuario">ListaUsuarioActivity</string>
+    <string name="title_activity_lista_rol">ListaRolActivity</string>
+
+</resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:fitsSystemWindows="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".controladores.ListaHorarioEstudianteActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="309dp"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="HORARIO"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_light"
+            android:textSize="30sp"
+            android:layout_weight="0.84" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/cerrarSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:backgroundTint="@android:color/holo_red_dark"
+            app:elevation="0dp"
+            app:fabSize="mini"
+            app:srcCompat="@android:drawable/ic_lock_power_off" />
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/filtroHorario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Buscar Horario......"
+        android:inputType="textPersonName" />
+
+    <ListView
+        android:id="@+id/listaHorario"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.82"
+        android:divider="@color/colorPrimary"
+        android:dividerHeight="1dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textFilterEnabled="true"
+        android:theme="@style/Animation.AppCompat.Dialog" />
+
+</LinearLayout>

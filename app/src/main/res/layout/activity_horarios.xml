@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
+    tools:context="gestionhorario.aplicacionmovil.uts.horario.controladores.HorariosActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="244dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="CREAR HORARIOS"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="30sp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/cerrarSesion"
+                    app:backgroundTint="@android:color/holo_red_dark"
+                    app:elevation="0dp"
+                    app:fabSize="mini"
+                    app:srcCompat="@android:drawable/ic_lock_power_off"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="351dp"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:gravity="center_vertical|right"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.01"
+                    android:text="Dia semana"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Spinner
+                    android:id="@+id/spinerDiaSemana"
+                    android:layout_width="217dp"
+                    android:layout_height="43dp"
+                    android:gravity="center_vertical|center_horizontal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linerIdHora"
+                android:layout_width="351dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|right"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.80"
+                    android:text="Hora Inicio"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/txtHoraInicio"
+                        android:layout_width="53dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="22dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text=":"
+                        android:textSize="36sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/txtMinutoInicio"
+                        android:layout_width="53dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linerIdHoraAlterna"
+                android:layout_width="351dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|right"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.71"
+                    android:text="Hora Fin"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.29"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/txtHoraFin"
+                        android:layout_width="53dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.03"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="22dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.10"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text=":"
+                        android:textSize="36sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/txtMinutoFin"
+                        android:layout_width="53dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_weight="0.52"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp">
+
+                    <Button
+                        android:id="@+id/btnAgregarHorario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:background="#5cb85c"
+                        android:text="Agregar"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/btnModificarHorario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#5bc0de"
+                        android:text="Modificar"
+                        android:textColor="#ffffff" />
+
+                    <Button
+                        android:id="@+id/btnEliminarHorario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:background="#d9534f"
+                        android:text="Eliminar"
+                        android:textColor="#ffffff" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/filtroHorario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Buscar Horario......"
+            android:inputType="textPersonName" />
+
+        <ListView
+            android:id="@+id/listaHorario"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:animationCache="false"
+            android:divider="@color/colorPrimary"
+            android:dividerHeight="1dp"
+            android:scrollingCache="false"
+            android:smoothScrollbar="true"
+            android:textFilterEnabled="true" />
+
+    </LinearLayout>
+</ScrollView>
