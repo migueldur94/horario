@@ -14,8 +14,10 @@ public class DataInfo {
     private static List<Roles> listaRoles = new ArrayList<>();
     private static String codigo;
     private static int idRol;
+
+    //Datos conexion web service
     public static String NAMESPACE = "http://tutoriaWS/";
-    public static String URL = "http://192.168.5.121:8080/tutoriaUTS/tutoriaWS?wsdl";
+    public static String URL = "http://192.168.1.39:8080/tutoriaUTS/tutoriaWS?wsdl";
 
     public static ArrayList<String> getDiasSemana() {
         if (diasSemana.size() == 0) {

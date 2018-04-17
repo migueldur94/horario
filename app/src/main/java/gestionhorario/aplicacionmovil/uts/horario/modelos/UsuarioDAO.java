@@ -353,11 +353,11 @@ public class UsuarioDAO {
 
     public boolean validacionInscrito(String codigo, int id, String fecha, int hora, int minuto) {
         Cursor cursor = db.query("  usuarios_usuarios_materias_horarios uumh " +
-                        "\tinner join usuarios_materias_horarios umh on umh.idUsuarioMateria=uumh.idUsuarioMateria\n" +
-                        "\tinner join materias_horarios mh on umh.idMateriaHorario=mh.idMateriaHorario \n" +
-                        "\tinner join materias m on m.idMateria=mh.idMateria\n" +
-                        "\tinner join horarios_ubicacion hu on hu.idHorarioUbicacion=mh.idHorarioUbicacion\n" +
-                        "\tinner join horarios h on hu.idHorario=h.idHorario", new String[]{"count(1) cantidad"}
+                "\tinner join usuarios_materias_horarios umh on umh.idUsuarioMateria=uumh.idUsuarioMateria\n" +
+                "\tinner join materias_horarios mh on umh.idMateriaHorario=mh.idMateriaHorario \n" +
+                "\tinner join materias m on m.idMateria=mh.idMateria\n" +
+                "\tinner join horarios_ubicacion hu on hu.idHorarioUbicacion=mh.idHorarioUbicacion\n" +
+                "\tinner join horarios h on hu.idHorario=h.idHorario", new String[]{"count(1) cantidad"}
                 , " uumh.idUsuario='" + codigo + "' and uumh.idUsuarioMateria=" + id + " and uumh.fecha >= '" + fecha + "' and h.horaInicio >=" + hora + " and h.minutoInicio >= " + minuto, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();

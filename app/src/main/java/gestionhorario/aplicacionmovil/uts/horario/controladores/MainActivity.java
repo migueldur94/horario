@@ -1,10 +1,12 @@
 package gestionhorario.aplicacionmovil.uts.horario.controladores;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -32,11 +34,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -49,13 +47,15 @@ import java.util.List;
 import gestionhorario.aplicacionmovil.uts.horario.DataInfo;
 import gestionhorario.aplicacionmovil.uts.horario.EVariables;
 import gestionhorario.aplicacionmovil.uts.horario.EncriptarMD5;
+import gestionhorario.aplicacionmovil.uts.horario.Procesos;
 import gestionhorario.aplicacionmovil.uts.horario.R;
 import gestionhorario.aplicacionmovil.uts.horario.modelos.HorarioDAO;
 import gestionhorario.aplicacionmovil.uts.horario.modelos.MateriaDAO;
 import gestionhorario.aplicacionmovil.uts.horario.modelos.RolDAO;
-import gestionhorario.aplicacionmovil.uts.horario.modelos.UsuarioWS;
+import gestionhorario.aplicacionmovil.uts.horario.modelos.WebService;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.Horario;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.Materia;
+import gestionhorario.aplicacionmovil.uts.horario.objetos.Parametro;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.Roles;
 import gestionhorario.aplicacionmovil.uts.horario.modelos.UsuarioDAO;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.UsuarioMateriaHorario;
@@ -65,7 +65,6 @@ import gestionhorario.aplicacionmovil.uts.horario.objetos.Variable;
 
 public class MainActivity extends AppCompatActivity {
     UsuarioDAO usuarioDAO;
-    UsuarioWS usuarioWS;
     Roles roles = new Roles();
     List<Roles> listaRoles = new ArrayList<Roles>();
     private Integer[] imagenGaleria = {
@@ -80,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.turismo,
             R.drawable.fondologin,
             R.drawable.fondologin};
+    ProgressDialog dialog;
+    List<SoapObject> listaSoapObject = new ArrayList<>();
+    List<Parametro> listaParametro = new ArrayList<>();
+    String nombreMetodoWS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         cargarGallery();
 
         usuarioDAO = new UsuarioDAO(this);
-        usuarioWS = new UsuarioWS(this);
 
         if (usuarioDAO.cantidadUsuarios() <= 0) {
             crearUsuarioPrimeraVez();
@@ -120,7 +122,23 @@ public class MainActivity extends AppCompatActivity {
                         Usuarios usuarios = new Usuarios();
                         EncriptarMD5 md5 = new EncriptarMD5();
                         //password = md5.encriptaEnMD5(password);
-                        usuarios = usuarioWS.getUsuario(codigo, password);
+                        usuarios = usuarioDAO.getUsuario(codigo, password);
+                        //Parametros para el servicio web
+                        Parametro parametro = new Parametro();
+                        parametro.setNombre("idUsuario");
+                        parametro.setValor("1");
+                        listaParametro.add(parametro);
+                        parametro = new Parametro();
+                        parametro.setNombre("contrasenia");
+                        parametro.setValor("1");
+                        listaParametro.add(parametro);
+                        parametro = new Parametro();
+                        parametro.setNombre("licencia");
+                        parametro.setValor("1");
+                        listaParametro.add(parametro);
+                        CallService service = new CallService();
+                        service.execute();
+                        usuarios=Procesos.getListaUsuarioSoap(listaSoapObject).get(0);
                         if (usuarios != null) {
                             listaRoles = usuarios.getListaRoles();
                             if (listaRoles.size() > 0) {
@@ -402,5 +420,37 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return table;
+    }
+
+    private class CallService extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            listaSoapObject = WebService.getConexion(nombreMetodoWS, listaParametro);
+
+            return null;
+        }
+
+        @Override
+        //Make Progress Bar visible
+        protected void onPreExecute() {
+
+            dialog = new ProgressDialog(MainActivity.this);
+            dialog.setIndeterminate(false);
+            dialog.setMessage("Loding...");
+            dialog.setCancelable(false);
+            dialog.show();
+
+        }
+
+        protected void onProgressUpdate(String... params) {
+        }
+
+        @Override
+        //Once WebService returns response
+        protected void onPostExecute(Void resultado) {
+
+            dialog.dismiss();
+        }
     }
 }

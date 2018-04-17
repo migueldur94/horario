@@ -4,9 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import org.ksoap2.serialization.SoapObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +14,6 @@ import gestionhorario.aplicacionmovil.uts.horario.DataInfo;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.Horario;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.Materia;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.MateriaHorario;
-import gestionhorario.aplicacionmovil.uts.horario.objetos.Parametros;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.Roles;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.Ubicacion;
 import gestionhorario.aplicacionmovil.uts.horario.objetos.UsuarioMateriaHorario;
@@ -136,26 +132,36 @@ public class UsuarioWS {
     }
 
     public Usuarios getUsuario(String codigo, String password) {
-        List<Parametros> lista = new ArrayList<>();
-        Parametros parametros = new Parametros();
-        parametros.setNombre("idUsuario");
-        parametros.setValor(codigo);
-        lista.add(parametros);
-        parametros = new Parametros();
-        parametros.setNombre("contrasenia");
-        parametros.setValor(password);
-        lista.add(parametros);
-        SoapObject objeto = WebService.getConexion("validacionUsuario", lista);
-        Log.e("datos", objeto.toString());
-        Usuarios u = new Usuarios();
-//        for (int i = 0; i < objeto.getPropertyCount(); i++){
-//            SoapObject ic = (SoapObject)objeto.getProperty(i);
-//
-//
-//            lista.add(new Vendedor(
-//                    Integer.parseInt(ic.getProperty("IdVendedor").toString()),
-//                    ic.getProperty("Nombres").toString()));
-//        }
+        Cursor cursor = db.query("usuarios u inner join usuarios_roles ur on u.codigo\n" +
+                "= ur.idUsuario inner join roles r on ur.idRol = r.idRol ", new String[]{
+                "u.codigo ", "u.password ", "u.nombre as nombreUsuario", "u.apellido", "u.activo", "u.correo",
+                "r.idRol", "r.nombre as nombreRol"}, "u.codigo='" + codigo.trim() + "' and u.password='" + password + "'", null, null, null, null);
+        Usuarios u = null;
+        Map<String, Usuarios> mapa = new HashMap<>();
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                String idUsuario = cursor.getString(cursor.getColumnIndex("codigo"));
+                if (mapa.get(idUsuario) == null) {
+                    u = new Usuarios();
+                    u.setCodigo(idUsuario);
+                    u.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+                    u.setNombre(cursor.getString(cursor.getColumnIndex("nombreUsuario")));
+                    u.setApellido(cursor.getString(cursor.getColumnIndex("apellido")));
+                    u.setActivo(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("activo"))));
+                    u.setCorreo(cursor.getString(cursor.getColumnIndex("correo")));
+                    mapa.put(idUsuario, u);
+                }
+                Roles roles = new Roles();
+                roles.setIdRol(cursor.getInt(cursor.getColumnIndex("idRol")));
+                roles.setNombre(cursor.getString(cursor.getColumnIndex("nombreRol")));
+                mapa.get(idUsuario).getListaRoles().add(roles);
+
+            } while (cursor.moveToNext());
+            for (Usuarios itObjeto : mapa.values()) {
+                u = itObjeto;
+            }
+        }
         return u;
     }
 
@@ -347,11 +353,11 @@ public class UsuarioWS {
 
     public boolean validacionInscrito(String codigo, int id, String fecha, int hora, int minuto) {
         Cursor cursor = db.query("  usuarios_usuarios_materias_horarios uumh " +
-                        "\tinner join usuarios_materias_horarios umh on umh.idUsuarioMateria=uumh.idUsuarioMateria\n" +
-                        "\tinner join materias_horarios mh on umh.idMateriaHorario=mh.idMateriaHorario \n" +
-                        "\tinner join materias m on m.idMateria=mh.idMateria\n" +
-                        "\tinner join horarios_ubicacion hu on hu.idHorarioUbicacion=mh.idHorarioUbicacion\n" +
-                        "\tinner join horarios h on hu.idHorario=h.idHorario", new String[]{"count(1) cantidad"}
+                "\tinner join usuarios_materias_horarios umh on umh.idUsuarioMateria=uumh.idUsuarioMateria\n" +
+                "\tinner join materias_horarios mh on umh.idMateriaHorario=mh.idMateriaHorario \n" +
+                "\tinner join materias m on m.idMateria=mh.idMateria\n" +
+                "\tinner join horarios_ubicacion hu on hu.idHorarioUbicacion=mh.idHorarioUbicacion\n" +
+                "\tinner join horarios h on hu.idHorario=h.idHorario", new String[]{"count(1) cantidad"}
                 , " uumh.idUsuario='" + codigo + "' and uumh.idUsuarioMateria=" + id + " and uumh.fecha >= '" + fecha + "' and h.horaInicio >=" + hora + " and h.minutoInicio >= " + minuto, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
